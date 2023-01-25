@@ -11,6 +11,6 @@ And put your token in a token file in the same directory.
 ** Usage
  Currently you have to start it in a terminal, i recommend using a screen if it shits the bed.
 ** Todo
-*** TODO I will work on making a systemd startup service.
-*** TODO Config file
-*** TODO Logging news
+- I will work on making a systemd startup service.
+- Config file
+- Logging news

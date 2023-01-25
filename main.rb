@@ -10,7 +10,7 @@ bot     = Discordrb::Bot.new token: File.open('keys').readlines.map(&:chomp)[0]
 bot.run :async
 
 server  = bot.servers.select { |id,server| server.name=="Szakkör" }.values[0]
-channel = server.channels.select{|n| n.name == 'test' }[0]
+channel = server.channels.select{|n| n.name == 'hnews' }[0]
 
 puts "We got everything!"
 
