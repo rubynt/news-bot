@@ -12,7 +12,6 @@ bot.run :async
 server  = bot.servers.select { |id,server| server.name=="Szakkör" }.values[0]
 channel = server.channels.select{|n| n.name == 'hnews' }[0]
 
-puts "We got everything!"
 
 def get_news
   URI.open($url) { |rss|
@@ -33,8 +32,6 @@ loop do
       x = Nokogiri::HTML(website).at('meta[property="og:image"]')
       x.attributes['content'].value if !(x.nil?)
     end
-    puts image
-    puts 
     channel.send_embed do |embed|
       embed.title     = k
       embed.image     = Discordrb::Webhooks::EmbedImage.new url: ((image[..1] != './' )? image : v[:link] + image[2..]) if !(image.nil?)
@@ -44,9 +41,7 @@ loop do
       embed.color     = "#ff5600"
       sleep 0.5
     end
-    puts k
   end
   $db.merge(new)
-  puts 'Sleeping 10 seconds!'
   sleep 60
 end
