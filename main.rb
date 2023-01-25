@@ -6,7 +6,7 @@ require 'discordrb'
 require 'nokogiri'
 $url = 'https://news.ycombinator.com/rss'
 
-bot     = Discordrb::Bot.new token: File.open('keys').readlines.map(&:chomp)[0]
+bot     = Discordrb::Bot.new token: File.open('token').readlines.map(&:chomp)[0]
 bot.run :async
 
 server  = bot.servers.select { |id,server| server.name=="Szakkör" }.values[0]
