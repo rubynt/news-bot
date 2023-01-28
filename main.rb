@@ -28,10 +28,13 @@ loop do
   new = get_news
   ($db.keys & new.keys).each { |n| new.delete(n) }
   new.each do |k,v|
+    
+    image = ''
     image = URI.open(v[:link]) do |website|
-      x = Nokogiri::HTML(website).at('meta[property="og:image"]')
-      x.attributes['content'].value if !(x.nil?)
+        x = Nokogiri::HTML(website).at('meta[property="og:image"]')
+        x.attributes['content'].value if !(x.nil?)
     end
+    
     channel.send_embed do |embed|
       embed.title     = k
       embed.image     = Discordrb::Webhooks::EmbedImage.new url: ((image[..1] != './' )? image : v[:link] + image[2..]) if !(image.nil?)
@@ -42,6 +45,6 @@ loop do
       sleep 0.5
     end
   end
-  $db.merge(new)
+  $db.merge!(new)
   sleep 60
 end
